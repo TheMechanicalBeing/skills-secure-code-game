@@ -126,6 +126,11 @@ class DB_CRUD_ops(object):
         # building database from scratch as it is more suitable for the purpose of the lab
         db = Create()
         con = Connect()
+
+        print(stock_symbol)
+        stock_symbol = stock_symbol.split(";")[0].strip("'")
+        print(stock_symbol)
+
         try:
             path = os.path.dirname(os.path.abspath(__file__))
             db_path = os.path.join(path, 'level-4.db')
@@ -133,8 +138,9 @@ class DB_CRUD_ops(object):
             cur = db_con.cursor()
 
             res = "[METHOD EXECUTED] get_stock_price\n"
-            query = "SELECT price FROM stocks WHERE symbol = '" + stock_symbol + "'"
-            res += "[QUERY] " + query + "\n"
+
+            query = f"SELECT price FROM stocks WHERE symbol = '{stock_symbol}'"
+            res += f"[QUERY] {query}\n"
             if ';' in query:
                 res += "[SCRIPT EXECUTION]\n"
                 cur.executescript(query)
