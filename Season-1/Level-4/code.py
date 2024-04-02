@@ -127,9 +127,7 @@ class DB_CRUD_ops(object):
         db = Create()
         con = Connect()
 
-        print(stock_symbol)
         stock_symbol = stock_symbol.split(";")[0].strip("'")
-        print(stock_symbol)
 
         try:
             path = os.path.dirname(os.path.abspath(__file__))
