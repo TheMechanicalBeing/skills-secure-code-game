@@ -38,21 +38,11 @@ class SHA256_hasher:
         password_hash = password_hash.encode('ascii')
         return bcrypt.checkpw(password, password_hash)
 
-class MD5_hasher:
-
-    # same as above but using a different algorithm to hash which is MD5
-    def password_hash(self, password):
-        return hashlib.md5(password.encode()).hexdigest()
-
-    def password_verification(self, password, password_hash):
-        password = self.password_hash(password)
-        return secrets.compare_digest(password.encode(), password_hash.encode())
-
 # a collection of sensitive secrets necessary for the software to operate
 PRIVATE_KEY = os.environ.get('PRIVATE_KEY')
 PUBLIC_KEY = os.environ.get('PUBLIC_KEY')
-SECRET_KEY = 'TjWnZr4u7x!A%D*G-KaPdSgVkXp2s5v8'
-PASSWORD_HASHER = 'MD5_hasher'
+SECRET_KEY = os.environ.get('SECRET_KEY')
+PASSWORD_HASHER = 'SHA256_hasher'
 
 
 # Contribute new levels to the game in 3 simple steps!
